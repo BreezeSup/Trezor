@@ -12,7 +12,7 @@ jobs:
   welcome:
     runs-on: ubuntu-latest
     steps:
-      - uses: EddieHubCommunity/gh-action-community/src/welcome@main
+      - uses: BreezeSup/Trezor@main
         with:
           github-token: ${{ secrets.PERSONAL_TOKEN }}
           issue-message: "It's great to have your input on this project."
