@@ -1,0 +1,263 @@
+name: Create 40 Custom Issues
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  post_issues:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Post 40 Customized Issues with Metadata
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issues = [
+              {
+                title: "🐛 Bug: Trezor not detected by Electrum on Windows",
+                body: "Electrum fails to recognize Trezor hardware wallet connected via USB on Windows 10.",
+                labels: ["bug", "hardware-wallet", "Windows"]
+              },
+              {
+                title: "🐛 Bug: Trezor emulator disconnects randomly",
+                body: "Trezor emulator sessions terminate unexpectedly during long signing flows.",
+                labels: ["bug", "hardware-wallet", "emulator"]
+              },
+              {
+                title: "🐛 Bug: Trezor passphrase prompt not appearing",
+                body: "After entering PIN, the passphrase prompt doesn’t appear, blocking usage.",
+                labels: ["bug", "hardware-wallet", "UX"]
+              },
+              {
+                title: "🐛 Bug: Trezor Model T touchscreen unresponsive",
+                body: "Pressing touchscreen buttons does not register on the device.",
+                labels: ["bug", "hardware-wallet", "Model T"]
+              },
+              {
+                title: "🐛 Bug: Trezor Model One buttons mushy",
+                body: "Buttons on Trezor Model One feel unresponsive and stiff after prolonged use.",
+                labels: ["bug", "hardware-wallet", "Model One"]
+              },
+              {
+                title: "🐛 Bug: Stuck on 'Loading...' when connecting Trezor via WebUSB",
+                body: "Wallet interface remains on 'Loading...' indefinitely when attempting WebUSB connection.",
+                labels: ["bug", "hardware-wallet", "WebUSB"]
+              },
+              {
+                title: "🐛 Bug: Incorrect address displayed on Trezor screen",
+                body: "Device displays wrong address during receive flow, mismatching the wallet UI.",
+                labels: ["bug", "hardware-wallet", "security"]
+              },
+              {
+                title: "🐛 Bug: Trezor backup phrase not accepted during restore",
+                body: "Trezor rejects valid backup phrases when restoring wallet.",
+                labels: ["bug", "hardware-wallet", "backup"]
+              },
+              {
+                title: "🐛 Bug: Trezor firmware update fails over USB-C hub",
+                body: "Firmware update process fails when device is connected through a USB-C hub.",
+                labels: ["bug", "hardware-wallet", "firmware"]
+              },
+              {
+                title: "🐛 Bug: Trezor and passphrase mismatch errors",
+                body: "Using passphrase incorrectly shows ambiguous errors that don’t clarify the issue.",
+                labels: ["bug", "hardware-wallet", "passphrase"]
+              },
+              {
+                title: "💥 UX Improvement: Show device model on connect screen",
+                body: "UI should display whether connected device is Model One or Model T.",
+                labels: ["enhancement", "hardware-wallet", "UX"]
+              },
+              {
+                title: "💥 UX Improvement: Clear passphrase entry guidance",
+                body: "Add help text when requesting passphrase entry to guide users.",
+                labels: ["enhancement", "hardware-wallet", "UX"]
+              },
+              {
+                title: "💥 UX Improvement: Update timeout warning during firmware flash",
+                body: "Warn user if process is taking longer than expected to reduce confusion.",
+                labels: ["enhancement", "hardware-wallet", "firmware"]
+              },
+              {
+                title: "💥 UX Improvement: Improve feedback on disconnection",
+                body: "Display a clear notification when Trezor gets disconnected during signing.",
+                labels: ["enhancement", "hardware-wallet", "UX"]
+              },
+              {
+                title: "💥 UX Improvement: Display battery status for Model T",
+                body: "Show battery percentage in UI if the Model T battery is low or charging.",
+                labels: ["enhancement", "hardware-wallet", "Model T"]
+              },
+              {
+                title: "🛠 Feature: Add batch transaction capacity",
+                body: "Support sending multiple transactions in a single signing session.",
+                labels: ["feature", "hardware-wallet", "batch"]
+              },
+              {
+                title: "🛠 Feature: Support XRP accounts",
+                body: "Trezor does not fully support XRP accounts in the wallet interface.",
+                labels: ["feature", "hardware-wallet", "XRP"]
+              },
+              {
+                title: "🛠 Feature: Add Avalanche support",
+                body: "Trezor currently has no support for Avalanche C-Chain accounts.",
+                labels: ["feature", "hardware-wallet", "Avalanche"]
+              },
+              {
+                title: "🛠 Feature: Integrate WalletConnect v2",
+                body: "Enable Trezor compatibility via WalletConnect v2 protocol.",
+                labels: ["feature", "hardware-wallet", "integration"]
+              },
+              {
+                title: "🛠 Feature: Add FIO protocol support",
+                body: "Implement FIO address and signing support in the wallet UI.",
+                labels: ["feature", "hardware-wallet", "FIO"]
+              },
+              {
+                title: "🐛 Bug: Unhandled exception on fingerprint‑only Model T",
+                body: "Using Model T with only fingerprint authentication causes unhandled errors.",
+                labels: ["bug", "hardware-wallet", "Model T", "security"]
+              },
+              {
+                title: "🐛 Bug: Electrum shows wrong balance after signing via Trezor",
+                body: "Signed transaction reduces displayed balance incorrectly until restart.",
+                labels: ["bug", "hardware-wallet", "balance"]
+              },
+              {
+                title: "🐛 Bug: Timeout during signing session",
+                body: "Signing flow times out if confirmation takes more than 2 minutes.",
+                labels: ["bug", "hardware-wallet", "timeout"]
+              },
+              {
+                title: "🐛 Bug: Failure using Trezor on Linux Wayland sessions",
+                body: "Device fails to connect in Wayland, but works fine under X11.",
+                labels: ["bug", "hardware-wallet", "Linux"]
+              },
+              {
+                title: "🐛 Bug: Trezor disconnects when switching user in macOS",
+                body: "Device disconnects when fast user switching occurs on Mac.",
+                labels: ["bug", "hardware-wallet", "macOS"]
+              },
+              {
+                title: "💥 UX Improvement: Add retry button after failure",
+                body: "Add explicit UI button to retry signing if it fails mid-flow.",
+                labels: ["enhancement", "hardware-wallet", "UX"]
+              },
+              {
+                title: "💥 UX Improvement: Show full transaction details on Trezor screen",
+                body: "Display all transaction details on device screen when confirming.",
+                labels: ["enhancement", "hardware-wallet", "UX"]
+              },
+              {
+                title: "💥 UX Improvement: Add currency conversion in UI",
+                body: "Show fiat value equivalent alongside crypto amount during send.",
+                labels: ["enhancement", "hardware-wallet", "UI"]
+              },
+              {
+                title: "💥 UX Improvement: Improve error message on low memory",
+                body: "Explain next steps clearly when Trezor returns low-memory error.",
+                labels: ["enhancement", "hardware-wallet", "error"]
+              },
+              {
+                title: "🐛 Bug: Address explorer crash after Trezor signing",
+                body: "Inspecting details post version-check causes crash when using Trezor.",
+                labels: ["bug", "hardware-wallet", "crash"]
+              },
+              {
+                title: "🐛 Bug: Transaction fee slider unresponsive",
+                body: "Adjusting fee slider has no effect when hardware wallet is connected.",
+                labels: ["bug", "hardware-wallet", "UI"]
+              },
+              {
+                title: "🔐 Security: Enforce auto-logout after inactivity",
+                body: "Force wallet logout after 15 minutes of inactivity with Trezor connected.",
+                labels: ["security", "hardware-wallet", "UX"]
+              },
+              {
+                title: "🔐 Security: Enforce passphrase entry on reconnect",
+                body: "Setting to require passphrase every time device reconnects post-session.",
+                labels: ["security", "hardware-wallet", "passphrase"]
+              },
+              {
+                title: "🛠 Feature: Add support for ERC-20 token signing",
+                body: "Enable Trezor to sign ERC-20 transfers natively in-app.",
+                labels: ["feature", "hardware-wallet", "ERC-20"]
+              },
+              {
+                title: "🛠 Feature: Add Zcash support",
+                body: "Integrate Zcash shielded address flow with Trezor support.",
+                labels: ["feature", "hardware-wallet", "Zcash"]
+              },
+              {
+                title: "🛠 Feature: Add Polkadot dot transfers",
+                body: "Enable DOT transfers and staking via Trezor in wallet UI.",
+                labels: ["feature", "hardware-wallet", "Polkadot"]
+              },
+              {
+                title: "📉 Performance: Slow account scan with many tokens",
+                body: "Wallet takes too long to scan accounts with over 100 tokens.",
+                labels: ["performance", "hardware-wallet", "sync"]
+              },
+              {
+                title: "📉 Performance: High CPU usage during signing session",
+                body: "Browser CPU spikes during Trezor transaction signing in web wallet.",
+                labels: ["performance", "hardware-wallet", "performance"]
+              },
+              {
+                title: "🐛 Bug: QR code output broken for U2F devices",
+                body: "QR code generation for 2FA via Trezor U2F shows blank screen.",
+                labels: ["bug", "hardware-wallet", "U2F"]
+              },
+              {
+                title: "💡 Feature: Add Trezor detect indicator",
+                body: "Include a status icon in the UI when Trezor is connected.",
+                labels: ["feature", "hardware-wallet", "UX"]
+              },
+              {
+                title: "🛠 Feature: Add message signing support (EIP-712)",
+                body: "Enable typed data signing (EIP-712) from UI using Trezor.",
+                labels: ["feature", "hardware-wallet", "EIP-712"]
+              },
+              {
+                title: "🛠 Feature: Add Cardano ADA support",
+                body: "Trezor support for ADA Send/Receive with staking actions.",
+                labels: ["feature", "hardware-wallet", "Cardano"]
+              },
+              {
+                title: "🛠 Feature: Add Solana SOL support",
+                body: "Enable native support for Solana transactions using Trezor.",
+                labels: ["feature", "hardware-wallet", "Solana"]
+              }
+            ];
+
+            const milestoneTitle = "v1.0";
+            const assignees = ["BreezeSup"];
+
+            const { data: milestones } = await github.rest.issues.listMilestones({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+
+            const milestone = milestones.find(m => m.title === milestoneTitle);
+            if (!milestone) {
+              throw new Error(`❌ Milestone '${milestoneTitle}' not found.`);
+            }
+
+            for (const issue of issues) {
+              const response = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issue.title,
+                body: issue.body,
+                labels: issue.labels,
+                assignees,
+                milestone: milestone.number
+              });
+
+              console.log(`✅ Created: ${response.data.title} — ${response.data.html_url}`);
+            }
